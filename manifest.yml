@@ -7,7 +7,6 @@ modules:
     - key: main
       handler: src/index.run
 app:
-  id: "ari:cloud:ecosystem::app/forge-fiend-ui-explorer"
   runtime:
     name: nodejs18.x
 permissions:
