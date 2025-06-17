@@ -5,7 +5,7 @@ modules:
       title: Forge Fiend UI Explorer
   function:
     - key: main
-      handler: src/index.run
+      handler: src/index.js
 app:
   runtime:
     name: nodejs18.x
