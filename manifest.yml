@@ -1,0 +1,13 @@
+modules:
+  jira:globalPage:
+    - key: forge-fiend-ui-explorer
+      function: main
+      title: Forge Fiend UI Explorer
+  function:
+    - key: main
+      handler: src/index.run
+app:
+  id: "your-app-id"
+permissions:
+  scopes:
+    - read:jira-user
