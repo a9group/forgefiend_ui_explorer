@@ -5,9 +5,10 @@ modules:
       title: Forge Fiend UI Explorer
   function:
     - key: main
-      handler: src/index.run
+      handler: src/index.js
 app:
-  id: "your-app-id"
+  runtime:
+    name: nodejs18.x
 permissions:
   scopes:
     - read:jira-user
