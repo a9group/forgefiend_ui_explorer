@@ -88,6 +88,47 @@ export const typography = {
   },
 };
 
+// Extended color palette for comprehensive theming
+export const extendedColors = {
+  ...colors,
+  status: {
+    success: token('color.background.success', '#E3FCEF'),
+    successText: token('color.text.success', '#006644'),
+    warning: token('color.background.warning', '#FFF4E6'),
+    warningText: token('color.text.warning', '#974F0C'),
+    danger: token('color.background.danger', '#FFEBE6'),
+    dangerText: token('color.text.danger', '#BF2600'),
+    info: token('color.background.information', '#DEEBFF'),
+    infoText: token('color.text.information', '#0747A6'),
+    discovery: token('color.background.discovery', '#EAE6FF'),
+    discoveryText: token('color.text.discovery', '#5E4DB2'),
+  },
+  brand: {
+    primary: token('color.background.brand.bold', '#0052CC'),
+    primaryHover: token('color.background.brand.bold.hovered', '#0747A6'),
+    secondary: token('color.background.neutral.subtle', '#F4F5F7'),
+    accent: token('color.background.accent.blue.subtle', '#E9F2FF'),
+  }
+};
+
+// Animation and transition utilities
+export const animations = {
+  easeInOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
+  duration: {
+    fast: '150ms',
+    normal: '200ms',
+    slow: '300ms',
+  },
+  hover: {
+    transform: 'translateY(-1px)',
+    transition: 'all 200ms ease-in-out',
+  },
+  focus: {
+    outline: `2px solid ${colors.border.focused}`,
+    outlineOffset: '2px',
+  }
+};
+
 // Common component styles using design tokens
 export const componentStyles = {
   container: {
@@ -95,6 +136,7 @@ export const componentStyles = {
     maxWidth: '1200px',
     margin: '0 auto',
     backgroundColor: colors.background.neutral,
+    minHeight: '100vh',
   },
   
   section: {
@@ -105,15 +147,44 @@ export const componentStyles = {
     backgroundColor: token('color.background.input', '#FFFFFF'),
     border: `1px solid ${colors.border.default}`,
     borderRadius: borderRadius.lg,
-    padding: spacing.lg,
+    padding: spacing.xl,
     boxShadow: colors.elevation.raised,
+    transition: `box-shadow ${animations.duration.normal} ${animations.easeInOut}`,
+    '&:hover': {
+      boxShadow: colors.elevation.overlay,
+    }
+  },
+  
+  cardCompact: {
+    backgroundColor: token('color.background.input', '#FFFFFF'),
+    border: `1px solid ${colors.border.default}`,
+    borderRadius: borderRadius.md,
+    padding: spacing.lg,
+    boxShadow: colors.elevation.surface,
   },
   
   tipBox: {
-    backgroundColor: colors.background.subtle,
-    padding: spacing.lg,
+    backgroundColor: extendedColors.brand.accent,
+    padding: spacing.xl,
     borderRadius: borderRadius.lg,
-    border: `1px solid ${colors.border.default}`,
+    border: `1px solid ${extendedColors.brand.primary}`,
+    borderLeft: `4px solid ${extendedColors.brand.primary}`,
+  },
+  
+  successBox: {
+    backgroundColor: extendedColors.status.success,
+    color: extendedColors.status.successText,
+    padding: spacing.lg,
+    borderRadius: borderRadius.md,
+    border: `1px solid ${extendedColors.status.successText}`,
+  },
+  
+  warningBox: {
+    backgroundColor: extendedColors.status.warning,
+    color: extendedColors.status.warningText,
+    padding: spacing.lg,
+    borderRadius: borderRadius.md,
+    border: `1px solid ${extendedColors.status.warningText}`,
   },
   
   flexRow: {
@@ -132,11 +203,89 @@ export const componentStyles = {
   grid: {
     display: 'grid',
     gap: spacing.lg,
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+  },
+  
+  gridCompact: {
+    display: 'grid',
+    gap: spacing.md,
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
   },
   
   centerContent: {
     textAlign: 'center',
     marginBottom: spacing.xxxl,
   },
+  
+  // Interactive elements
+  buttonGroup: {
+    display: 'flex',
+    gap: spacing.xs,
+    flexWrap: 'wrap',
+    alignItems: 'center',
+  },
+  
+  formField: {
+    marginBottom: spacing.lg,
+  },
+  
+  // Layout utilities
+  fullWidth: {
+    width: '100%',
+  },
+  
+  maxWidth: {
+    maxWidth: '600px',
+  },
+  
+  // Responsive breakpoints
+  mobile: '@media (max-width: 768px)',
+  tablet: '@media (max-width: 1024px)',
+  desktop: '@media (min-width: 1025px)',
+};
+
+// Component-specific theme configurations
+export const componentThemes = {
+  button: {
+    primary: {
+      backgroundColor: extendedColors.brand.primary,
+      color: 'white',
+      '&:hover': {
+        backgroundColor: extendedColors.brand.primaryHover,
+      }
+    },
+    secondary: {
+      backgroundColor: extendedColors.brand.secondary,
+      color: colors.text.primary,
+      border: `1px solid ${colors.border.default}`,
+    }
+  },
+  
+  table: {
+    header: {
+      backgroundColor: colors.background.subtle,
+      fontWeight: typography.heading.small.fontWeight,
+      borderBottom: `2px solid ${colors.border.default}`,
+    },
+    row: {
+      borderBottom: `1px solid ${colors.background.subtle}`,
+      '&:hover': {
+        backgroundColor: colors.background.subtle,
+      }
+    }
+  },
+  
+  modal: {
+    overlay: {
+      backgroundColor: 'rgba(9, 30, 66, 0.54)',
+      backdropFilter: 'blur(4px)',
+    },
+    content: {
+      backgroundColor: 'white',
+      borderRadius: borderRadius.xl,
+      boxShadow: colors.elevation.overlay,
+      maxWidth: '90vw',
+      maxHeight: '90vh',
+    }
+  }
 };
