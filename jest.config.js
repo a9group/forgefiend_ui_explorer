@@ -1,8 +1,8 @@
 module.exports = {
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
   moduleNameMapping: {
-    '^@forge/ui$': '<rootDir>/src/__mocks__/@forge/ui.js',
+    '^@atlaskit/(.*)$': '<rootDir>/src/__mocks__/@atlaskit/$1.js',
     '^@forge/api$': '<rootDir>/src/__mocks__/@forge/api.js'
   },
   testMatch: [

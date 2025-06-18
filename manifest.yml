@@ -5,7 +5,7 @@ modules:
       title: Forge Fiend UI Explorer
 resources:
   - key: main
-    path: src/index.js
+    path: static/main
 app:
   id: ari:cloud:ecosystem::app/e98a3464-9aeb-480f-af0d-19ce688cb92f
   runtime:

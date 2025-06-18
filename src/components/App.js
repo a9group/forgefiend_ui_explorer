@@ -1,28 +1,51 @@
-import ForgeUI, { Fragment, Text, Button, useState, ModalDialog, useEffect } from '@forge/ui';
+import React, { useState, useEffect } from 'react';
+import { Modal, ModalBody, ModalHeader, ModalFooter } from '@atlaskit/modal-dialog';
+import Button from '@atlaskit/button/standard-button';
 import { fetchUserDetails } from '../services/userService';
 
 export const App = () => {
     const [isOpen, setOpen] = useState(false);
     const [user, setUser] = useState(null);
 
-    useEffect(async () => {
-        const userDetails = await fetchUserDetails();
-        setUser(userDetails);
+    useEffect(() => {
+        const loadUserDetails = async () => {
+            try {
+                const userDetails = await fetchUserDetails();
+                setUser(userDetails);
+            } catch (error) {
+                console.error('Failed to load user details:', error);
+            }
+        };
+        loadUserDetails();
     }, []);
 
     return (
-        <Fragment>
-            <Text>Welcome to Forge Fiend UI Explorer! Click below to learn about Jira UI elements.</Text>
-            <Button text="Explore Jira UI" onClick={() => setOpen(true)} />
+        <div>
+            <p>Welcome to Forge Fiend UI Explorer! Click below to learn about Jira UI elements.</p>
+            <Button appearance="primary" onClick={() => setOpen(true)}>
+                Explore Jira UI
+            </Button>
             {isOpen && (
-                <ModalDialog header="Jira UI Elements" onClose={() => setOpen(false)}>
-                    <Text>- **Global Pages**: Custom pages for app navigation.</Text>
-                    <Text>- **Issue Panels**: Extend Jira issues with extra context.</Text>
-                    <Text>- **Project Pages**: Dedicated pages for project-specific insights.</Text>
-                    <Text>- **Custom Fields**: Store structured data inside Jira issues.</Text>
-                    <Text>User: {user ? user.displayName : 'Loading...'}</Text>
-                </ModalDialog>
+                <Modal onClose={() => setOpen(false)}>
+                    <ModalHeader>
+                        <h2>Jira UI Elements</h2>
+                    </ModalHeader>
+                    <ModalBody>
+                        <ul>
+                            <li><strong>Global Pages</strong>: Custom pages for app navigation.</li>
+                            <li><strong>Issue Panels</strong>: Extend Jira issues with extra context.</li>
+                            <li><strong>Project Pages</strong>: Dedicated pages for project-specific insights.</li>
+                            <li><strong>Custom Fields</strong>: Store structured data inside Jira issues.</li>
+                        </ul>
+                        <p>User: {user ? user.displayName : 'Loading...'}</p>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button appearance="subtle" onClick={() => setOpen(false)}>
+                            Close
+                        </Button>
+                    </ModalFooter>
+                </Modal>
             )}
-        </Fragment>
+        </div>
     );
 };

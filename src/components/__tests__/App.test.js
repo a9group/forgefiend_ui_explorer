@@ -1,106 +1,94 @@
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { App } from '../App';
 import { fetchUserDetails } from '../../services/userService';
-import ForgeUI, { useState, useEffect } from '@forge/ui';
 
 // Mock the userService
 jest.mock('../../services/userService');
 
 describe('App Component', () => {
-  let mockSetOpen, mockSetUser;
-  
   beforeEach(() => {
     jest.clearAllMocks();
-    
-    // Setup useState mocks
-    mockSetOpen = jest.fn();
-    mockSetUser = jest.fn();
-    
-    useState
-      .mockReturnValueOnce([false, mockSetOpen]) // isOpen state
-      .mockReturnValueOnce([null, mockSetUser]);  // user state
   });
 
   it('should render welcome message and explore button', () => {
-    const component = App();
+    render(<App />);
     
-    expect(component).toContain('Welcome to Forge Fiend UI Explorer!');
-    expect(component).toContain('<Button onClick');
-    expect(component).toContain('Explore Jira UI');
+    expect(screen.getByText('Welcome to Forge Fiend UI Explorer! Click below to learn about Jira UI elements.')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Explore Jira UI' })).toBeInTheDocument();
   });
 
-  it('should fetch user details on component mount', () => {
+  it('should fetch user details on component mount', async () => {
     const mockUser = { displayName: 'John Doe', accountId: 'test-id' };
     fetchUserDetails.mockResolvedValue(mockUser);
     
-    App();
+    render(<App />);
     
-    // Verify useEffect was called
-    expect(useEffect).toHaveBeenCalledWith(expect.any(Function), []);
-    
-    // Verify fetchUserDetails was called
-    expect(fetchUserDetails).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(fetchUserDetails).toHaveBeenCalled();
+    });
   });
 
-  it('should not show modal dialog when isOpen is false', () => {
-    useState
-      .mockReturnValueOnce([false, mockSetOpen]) // isOpen = false
-      .mockReturnValueOnce([null, mockSetUser]);
+  it('should not show modal dialog initially', () => {
+    render(<App />);
     
-    const component = App();
-    
-    expect(component).not.toContain('<ModalDialog');
+    expect(screen.queryByTestId('atlaskit-modal')).not.toBeInTheDocument();
   });
 
-  it('should show modal dialog when isOpen is true', () => {
-    useState
-      .mockReturnValueOnce([true, mockSetOpen]) // isOpen = true
-      .mockReturnValueOnce([null, mockSetUser]);
+  it('should show modal dialog when button is clicked', () => {
+    render(<App />);
     
-    const component = App();
+    const button = screen.getByRole('button', { name: 'Explore Jira UI' });
+    fireEvent.click(button);
     
-    expect(component).toContain('<ModalDialog header="Jira UI Elements"');
-    expect(component).toContain('Global Pages');
-    expect(component).toContain('Issue Panels');
-    expect(component).toContain('Project Pages');
-    expect(component).toContain('Custom Fields');
+    expect(screen.getByTestId('atlaskit-modal')).toBeInTheDocument();
+    expect(screen.getByText('Jira UI Elements')).toBeInTheDocument();
+    expect(screen.getByText(/Global Pages/)).toBeInTheDocument();
+    expect(screen.getByText(/Issue Panels/)).toBeInTheDocument();
+    expect(screen.getByText(/Project Pages/)).toBeInTheDocument();
+    expect(screen.getByText(/Custom Fields/)).toBeInTheDocument();
   });
 
-  it('should display user name when user is loaded', () => {
+  it('should display user name when user is loaded', async () => {
     const mockUser = { displayName: 'Jane Smith' };
-    useState
-      .mockReturnValueOnce([true, mockSetOpen])
-      .mockReturnValueOnce([mockUser, mockSetUser]);
+    fetchUserDetails.mockResolvedValue(mockUser);
     
-    const component = App();
+    render(<App />);
     
-    expect(component).toContain('User: Jane Smith');
+    // Open modal to see user info
+    const button = screen.getByRole('button', { name: 'Explore Jira UI' });
+    fireEvent.click(button);
+    
+    await waitFor(() => {
+      expect(screen.getByText('User: Jane Smith')).toBeInTheDocument();
+    });
   });
 
   it('should display loading message when user is not loaded', () => {
-    useState
-      .mockReturnValueOnce([true, mockSetOpen])
-      .mockReturnValueOnce([null, mockSetUser]);
+    fetchUserDetails.mockImplementation(() => new Promise(() => {})); // Never resolves
     
-    const component = App();
+    render(<App />);
     
-    expect(component).toContain('User: Loading...');
+    // Open modal to see user info
+    const button = screen.getByRole('button', { name: 'Explore Jira UI' });
+    fireEvent.click(button);
+    
+    expect(screen.getByText('User: Loading...')).toBeInTheDocument();
   });
 
-  it('should handle button click to open modal', () => {
-    const component = App();
+  it('should close modal when close button is clicked', () => {
+    render(<App />);
     
-    // The button should have an onClick handler that calls setOpen(true)
-    expect(component).toContain('<Button onClick');
-  });
-
-  it('should handle modal close', () => {
-    useState
-      .mockReturnValueOnce([true, mockSetOpen])
-      .mockReturnValueOnce([null, mockSetUser]);
+    // Open modal
+    const openButton = screen.getByRole('button', { name: 'Explore Jira UI' });
+    fireEvent.click(openButton);
     
-    const component = App();
+    expect(screen.getByTestId('atlaskit-modal')).toBeInTheDocument();
     
-    // The modal should have an onClose handler that calls setOpen(false)
-    expect(component).toContain('onClose');
+    // Close modal
+    const closeButton = screen.getByRole('button', { name: 'Close' });
+    fireEvent.click(closeButton);
+    
+    expect(screen.queryByTestId('atlaskit-modal')).not.toBeInTheDocument();
   });
 });
