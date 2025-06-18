@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, ModalBody, ModalHeader, ModalFooter } from '@atlaskit/modal-dialog';
 import Button from '@atlaskit/button/standard-button';
+import Tabs, { Tab, TabList, TabPanel } from '@atlaskit/tabs';
 import { fetchUserDetails } from '../services/userService';
+import { ButtonExamples } from './examples/ButtonExamples';
+import { TableExamples } from './examples/TableExamples';
+import { FormExamples } from './examples/FormExamples';
+import { FeedbackExamples } from './examples/FeedbackExamples';
+import { NavigationExamples } from './examples/NavigationExamples';
+import { DataDisplayExamples } from './examples/DataDisplayExamples';
 
 export const App = () => {
     const [isOpen, setOpen] = useState(false);
@@ -20,28 +27,64 @@ export const App = () => {
     }, []);
 
     return (
-        <div>
-            <p>Welcome to Forge Fiend UI Explorer! Click below to learn about Jira UI elements.</p>
-            <Button appearance="primary" onClick={() => setOpen(true)}>
-                Explore Jira UI
-            </Button>
+        <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
+            <div style={{ marginBottom: '30px', textAlign: 'center' }}>
+                <h1>🔥 Forge Fiend UI Explorer</h1>
+                <p style={{ fontSize: '18px', color: '#6B778C', marginBottom: '20px' }}>
+                    Explore all available UI Kit 2 components for Forge apps
+                </p>
+                <p style={{ marginBottom: '20px' }}>
+                    Current User: <strong>{user ? user.displayName : 'Loading...'}</strong>
+                </p>
+                <Button appearance="primary" onClick={() => setOpen(true)}>
+                    🚀 Open Component Explorer
+                </Button>
+            </div>
+
+            {/* Quick Preview Section */}
+            <div style={{ marginBottom: '30px' }}>
+                <h2>Quick Component Preview</h2>
+                <ButtonExamples preview={true} />
+            </div>
+
             {isOpen && (
-                <Modal onClose={() => setOpen(false)}>
+                <Modal onClose={() => setOpen(false)} width="large">
                     <ModalHeader>
-                        <h2>Jira UI Elements</h2>
+                        <h2>🎨 Forge UI Kit 2 Component Library</h2>
                     </ModalHeader>
                     <ModalBody>
-                        <ul>
-                            <li><strong>Global Pages</strong>: Custom pages for app navigation.</li>
-                            <li><strong>Issue Panels</strong>: Extend Jira issues with extra context.</li>
-                            <li><strong>Project Pages</strong>: Dedicated pages for project-specific insights.</li>
-                            <li><strong>Custom Fields</strong>: Store structured data inside Jira issues.</li>
-                        </ul>
-                        <p>User: {user ? user.displayName : 'Loading...'}</p>
+                        <Tabs>
+                            <TabList>
+                                <Tab>Buttons & Actions</Tab>
+                                <Tab>Tables & Data</Tab>
+                                <Tab>Forms & Inputs</Tab>
+                                <Tab>Feedback & Status</Tab>
+                                <Tab>Navigation</Tab>
+                                <Tab>Data Display</Tab>
+                            </TabList>
+                            <TabPanel>
+                                <ButtonExamples />
+                            </TabPanel>
+                            <TabPanel>
+                                <TableExamples />
+                            </TabPanel>
+                            <TabPanel>
+                                <FormExamples />
+                            </TabPanel>
+                            <TabPanel>
+                                <FeedbackExamples />
+                            </TabPanel>
+                            <TabPanel>
+                                <NavigationExamples />
+                            </TabPanel>
+                            <TabPanel>
+                                <DataDisplayExamples />
+                            </TabPanel>
+                        </Tabs>
                     </ModalBody>
                     <ModalFooter>
                         <Button appearance="subtle" onClick={() => setOpen(false)}>
-                            Close
+                            Close Explorer
                         </Button>
                     </ModalFooter>
                 </Modal>
