@@ -6,7 +6,26 @@
     <title>Forge Fiend UI Explorer</title>
 </head>
 <body>
-    <div id="root"></div>
-    <script type="module" src="./index.js"></script>
+    <div id="root">
+        <div style="padding: 20px; text-align: center;">
+            <h1>🔥 Forge Fiend UI Explorer</h1>
+            <p>Loading components...</p>
+            <div id="error-message" style="color: red; margin-top: 10px;"></div>
+        </div>
+    </div>
+    <script type="module">
+        try {
+            console.log('Starting app initialization...');
+            import('./index.js').then(() => {
+                console.log('App loaded successfully');
+            }).catch(error => {
+                console.error('Failed to load app:', error);
+                document.getElementById('error-message').textContent = 'Error loading app: ' + error.message;
+            });
+        } catch (error) {
+            console.error('Script error:', error);
+            document.getElementById('error-message').textContent = 'Script error: ' + error.message;
+        }
+    </script>
 </body>
 </html>
