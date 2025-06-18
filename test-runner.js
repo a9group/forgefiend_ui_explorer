@@ -146,7 +146,7 @@ describe('File Structure', () => {
 
   it('should have mock files', () => {
     expect(fs.existsSync('src/__mocks__/@forge')).toBe(true);
-    expect(fs.existsSync('src/__mocks__/@forge/ui.js')).toBe(true);
+    expect(fs.existsSync('src/__mocks__/@atlaskit')).toBe(true);
     expect(fs.existsSync('src/__mocks__/@forge/api.js')).toBe(true);
   });
 });

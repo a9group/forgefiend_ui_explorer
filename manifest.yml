@@ -1,12 +1,13 @@
 modules:
   jira:globalPage:
     - key: forge-fiend-ui-explorer
-      function: main
+      resource: main
       title: Forge Fiend UI Explorer
-  function:
-    - key: main
-      handler: src/index.js
+resources:
+  - key: main
+    path: static/main
 app:
+  id: ari:cloud:ecosystem::app/e98a3464-9aeb-480f-af0d-19ce688cb92f
   runtime:
     name: nodejs18.x
 permissions:

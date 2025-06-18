@@ -1,5 +1,4 @@
-import { run } from '../index';
-import ForgeUI, { render, GlobalPage } from '@forge/ui';
+import AppComponent from '../index';
 import { App } from '../components/App';
 
 // Mock the App component
@@ -10,27 +9,11 @@ describe('Index Module', () => {
     jest.clearAllMocks();
   });
 
-  it('should render App component within GlobalPage', () => {
-    const mockApp = '<MockApp />';
-    App.mockReturnValue(mockApp);
-    
-    run;
-    
-    expect(render).toHaveBeenCalled();
-    expect(GlobalPage).toHaveBeenCalled();
-    expect(App).toHaveBeenCalled();
+  it('should export App component as default', () => {
+    expect(AppComponent).toBe(App);
   });
 
-  it('should export run function', () => {
-    expect(run).toBeDefined();
-    expect(typeof run).toBe('object'); // render returns an object
-  });
-
-  it('should use correct Forge UI components', () => {
-    run;
-    
-    expect(render).toHaveBeenCalledWith(
-      expect.stringContaining('<GlobalPage>')
-    );
+  it('should be a valid React component', () => {
+    expect(typeof AppComponent).toBe('function');
   });
 });
