@@ -50,7 +50,7 @@ function loadReactApp() {
     `;
     
     document.getElementById('explore-btn').addEventListener('click', function() {
-        openFullComponentExplorer();
+        showComponentsInline();
     });
 }
 
@@ -75,7 +75,7 @@ function loadEnhancedHTMLApp() {
                     cursor: pointer;
                     font-size: 16px;
                 ">
-                    🚀 Open Component Explorer
+                    🚀 Show All Components
                 </button>
             </div>
             
@@ -109,7 +109,7 @@ function loadEnhancedHTMLApp() {
     
     // Add click handler for the button
     document.getElementById('explore-btn').addEventListener('click', function() {
-        openComponentExplorer();
+        showComponentsInline();
     });
     
     console.log('Enhanced HTML version loaded successfully');
@@ -124,6 +124,171 @@ function loadBasicVersion() {
             <button onclick="alert('Basic version active')">Test Button</button>
         </div>
     `;
+}
+
+function showComponentsInline() {
+    const root = document.getElementById('root');
+    root.innerHTML = `
+        <div style="padding: 20px; max-width: 1200px; margin: 0 auto;">
+            <div style="margin-bottom: 30px; text-align: center;">
+                <h1>🔥 Forge Fiend UI Explorer</h1>
+                <p style="font-size: 18px; color: #6B778C; margin-bottom: 20px;">
+                    Complete UI Kit 2 Component Library
+                </p>
+                <button id="back-btn" style="
+                    background: #F4F5F7; color: #172B4D; border: 1px solid #DFE1E6; 
+                    padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-bottom: 20px;
+                ">
+                    ← Back to Overview
+                </button>
+            </div>
+            
+            <!-- Buttons Section -->
+            <div style="margin-bottom: 40px;">
+                <h2 style="color: #172B4D; margin: 0 0 20px 0; font-size: 24px; border-bottom: 2px solid #DFE1E6; padding-bottom: 10px;">🔘 Buttons & Actions</h2>
+                <div style="background: #F4F5F7; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="margin: 0 0 15px 0; color: #172B4D;">Button Appearances</h3>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 15px;">
+                        <button style="background: #0052CC; color: white; border: none; padding: 10px 20px; border-radius: 3px; font-weight: 500; cursor: pointer; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#0747A6'" onmouseout="this.style.backgroundColor='#0052CC'">Primary</button>
+                        <button style="background: #FAFBFC; color: #172B4D; border: 2px solid #DFE1E6; padding: 8px 18px; border-radius: 3px; font-weight: 500; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.backgroundColor='#F4F5F7'; this.style.borderColor='#B3BAC5'" onmouseout="this.style.backgroundColor='#FAFBFC'; this.style.borderColor='#DFE1E6'">Default</button>
+                        <button style="background: transparent; color: #6B778C; border: none; padding: 10px 20px; border-radius: 3px; font-weight: 500; cursor: pointer; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#F4F5F7'" onmouseout="this.style.backgroundColor='transparent'">Subtle</button>
+                        <button style="background: #FFAB00; color: #172B4D; border: none; padding: 10px 20px; border-radius: 3px; font-weight: 500; cursor: pointer; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#FF991F'" onmouseout="this.style.backgroundColor='#FFAB00'">Warning</button>
+                        <button style="background: #DE350B; color: white; border: none; padding: 10px 20px; border-radius: 3px; font-weight: 500; cursor: pointer; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#BF2600'" onmouseout="this.style.backgroundColor='#DE350B'">Danger</button>
+                    </div>
+                    <h4 style="margin: 20px 0 10px 0; color: #172B4D;">Button Sizes</h4>
+                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                        <button style="background: #0052CC; color: white; border: none; padding: 6px 12px; border-radius: 3px; font-size: 12px; cursor: pointer;">Small</button>
+                        <button style="background: #0052CC; color: white; border: none; padding: 8px 16px; border-radius: 3px; font-size: 14px; cursor: pointer;">Medium</button>
+                        <button style="background: #0052CC; color: white; border: none; padding: 12px 24px; border-radius: 3px; font-size: 16px; cursor: pointer;">Large</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Status Indicators -->
+            <div style="margin-bottom: 40px;">
+                <h2 style="color: #172B4D; margin: 0 0 20px 0; font-size: 24px; border-bottom: 2px solid #DFE1E6; padding-bottom: 10px;">📊 Status Indicators (Lozenges)</h2>
+                <div style="background: #F4F5F7; padding: 20px; border-radius: 8px;">
+                    <h3 style="margin: 0 0 15px 0; color: #172B4D;">Status Types</h3>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px;">
+                        <span style="background: #E3FCEF; color: #006644; padding: 6px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px;">Success</span>
+                        <span style="background: #FFF4E6; color: #974F0C; padding: 6px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px;">Warning</span>
+                        <span style="background: #FFEBE6; color: #BF2600; padding: 6px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px;">Error</span>
+                        <span style="background: #DEEBFF; color: #0747A6; padding: 6px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px;">Info</span>
+                        <span style="background: #EAE6FF; color: #5E4DB2; padding: 6px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px;">New</span>
+                    </div>
+                    <h4 style="margin: 20px 0 10px 0; color: #172B4D;">Priority Indicators</h4>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                        <span style="background: #FFEBE6; color: #BF2600; padding: 4px 8px; border-radius: 8px; font-size: 11px; font-weight: 700;">HIGHEST</span>
+                        <span style="background: #FFF4E6; color: #974F0C; padding: 4px 8px; border-radius: 8px; font-size: 11px; font-weight: 700;">HIGH</span>
+                        <span style="background: #DEEBFF; color: #0747A6; padding: 4px 8px; border-radius: 8px; font-size: 11px; font-weight: 700;">MEDIUM</span>
+                        <span style="background: #F4F5F7; color: #6B778C; padding: 4px 8px; border-radius: 8px; font-size: 11px; font-weight: 700;">LOW</span>
+                        <span style="background: #F4F5F7; color: #97A0AF; padding: 4px 8px; border-radius: 8px; font-size: 11px; font-weight: 700;">LOWEST</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Form Elements -->
+            <div style="margin-bottom: 40px;">
+                <h2 style="color: #172B4D; margin: 0 0 20px 0; font-size: 24px; border-bottom: 2px solid #DFE1E6; padding-bottom: 10px;">📝 Form Elements</h2>
+                <div style="background: #F4F5F7; padding: 20px; border-radius: 8px;">
+                    <div style="display: grid; gap: 20px; max-width: 600px;">
+                        <div>
+                            <label style="display: block; margin-bottom: 6px; color: #172B4D; font-weight: 600; font-size: 14px;">Text Input</label>
+                            <input type="text" placeholder="Enter text here..." style="width: 100%; padding: 10px 12px; border: 2px solid #DFE1E6; border-radius: 3px; font-size: 14px; transition: border-color 0.2s;" onfocus="this.style.borderColor='#0052CC'" onblur="this.style.borderColor='#DFE1E6'">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 6px; color: #172B4D; font-weight: 600; font-size: 14px;">Select Dropdown</label>
+                            <select style="width: 100%; padding: 10px 12px; border: 2px solid #DFE1E6; border-radius: 3px; font-size: 14px; background: white;">
+                                <option>Choose an option...</option>
+                                <option>High Priority</option>
+                                <option>Medium Priority</option>
+                                <option>Low Priority</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 6px; color: #172B4D; font-weight: 600; font-size: 14px;">Textarea</label>
+                            <textarea placeholder="Enter description..." style="width: 100%; padding: 10px 12px; border: 2px solid #DFE1E6; border-radius: 3px; font-size: 14px; min-height: 80px; resize: vertical;" onfocus="this.style.borderColor='#0052CC'" onblur="this.style.borderColor='#DFE1E6'"></textarea>
+                        </div>
+                        <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" style="margin-right: 8px; transform: scale(1.2);"> 
+                                <span style="color: #172B4D;">Enable notifications</span>
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="radio-group" style="margin-right: 8px; transform: scale(1.2);"> 
+                                <span style="color: #172B4D;">Option A</span>
+                            </label>
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="radio-group" style="margin-right: 8px; transform: scale(1.2);"> 
+                                <span style="color: #172B4D;">Option B</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data Table -->
+            <div style="margin-bottom: 40px;">
+                <h2 style="color: #172B4D; margin: 0 0 20px 0; font-size: 24px; border-bottom: 2px solid #DFE1E6; padding-bottom: 10px;">📋 Data Table</h2>
+                <div style="border: 2px solid #DFE1E6; border-radius: 8px; overflow: hidden; background: white;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead style="background: #F4F5F7;">
+                            <tr>
+                                <th style="padding: 15px; text-align: left; color: #172B4D; font-weight: 600; border-bottom: 2px solid #DFE1E6;">Issue Key</th>
+                                <th style="padding: 15px; text-align: left; color: #172B4D; font-weight: 600; border-bottom: 2px solid #DFE1E6;">Summary</th>
+                                <th style="padding: 15px; text-align: left; color: #172B4D; font-weight: 600; border-bottom: 2px solid #DFE1E6;">Status</th>
+                                <th style="padding: 15px; text-align: left; color: #172B4D; font-weight: 600; border-bottom: 2px solid #DFE1E6;">Priority</th>
+                                <th style="padding: 15px; text-align: left; color: #172B4D; font-weight: 600; border-bottom: 2px solid #DFE1E6;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #F4F5F7;">
+                                <td style="padding: 15px; color: #0052CC; font-weight: 600;">DEMO-1</td>
+                                <td style="padding: 15px; color: #172B4D;">Fix login authentication bug</td>
+                                <td style="padding: 15px;"><span style="background: #E3FCEF; color: #006644; padding: 4px 8px; border-radius: 8px; font-size: 11px; font-weight: 700;">DONE</span></td>
+                                <td style="padding: 15px;"><span style="background: #FFEBE6; color: #BF2600; padding: 4px 8px; border-radius: 8px; font-size: 11px; font-weight: 700;">HIGH</span></td>
+                                <td style="padding: 15px;"><button style="background: transparent; color: #0052CC; border: none; cursor: pointer; text-decoration: underline; font-weight: 500;">View</button></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #F4F5F7;">
+                                <td style="padding: 15px; color: #0052CC; font-weight: 600;">DEMO-2</td>
+                                <td style="padding: 15px; color: #172B4D;">Implement user dashboard</td>
+                                <td style="padding: 15px;"><span style="background: #FFF4E6; color: #974F0C; padding: 4px 8px; border-radius: 8px; font-size: 11px; font-weight: 700;">IN PROGRESS</span></td>
+                                <td style="padding: 15px;"><span style="background: #DEEBFF; color: #0747A6; padding: 4px 8px; border-radius: 8px; font-size: 11px; font-weight: 700;">MEDIUM</span></td>
+                                <td style="padding: 15px;"><button style="background: transparent; color: #0052CC; border: none; cursor: pointer; text-decoration: underline; font-weight: 500;">Edit</button></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #F4F5F7;">
+                                <td style="padding: 15px; color: #0052CC; font-weight: 600;">DEMO-3</td>
+                                <td style="padding: 15px; color: #172B4D;">Update documentation</td>
+                                <td style="padding: 15px;"><span style="background: #F4F5F7; color: #6B778C; padding: 4px 8px; border-radius: 8px; font-size: 11px; font-weight: 700;">TO DO</span></td>
+                                <td style="padding: 15px;"><span style="background: #F4F5F7; color: #6B778C; padding: 4px 8px; border-radius: 8px; font-size: 11px; font-weight: 700;">LOW</span></td>
+                                <td style="padding: 15px;"><button style="background: transparent; color: #0052CC; border: none; cursor: pointer; text-decoration: underline; font-weight: 500;">Assign</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Implementation Note -->
+            <div style="background: linear-gradient(135deg, #DEEBFF 0%, #E6FCFF 100%); padding: 24px; border-radius: 8px; border-left: 4px solid #0052CC; margin-bottom: 40px;">
+                <h3 style="margin: 0 0 15px 0; color: #0747A6;">💡 Full React Implementation Available!</h3>
+                <p style="margin: 0 0 15px 0; color: #172B4D; line-height: 1.6;">
+                    This demo shows HTML/CSS versions of Atlaskit components. The actual React implementation includes:
+                </p>
+                <ul style="margin: 0; padding-left: 20px; color: #172B4D; line-height: 1.6;">
+                    <li>Full Atlaskit component library with proper theming</li>
+                    <li>Interactive state management and form validation</li>
+                    <li>Dynamic tables with sorting, filtering, and pagination</li>
+                    <li>Modal dialogs, tabs, and complex navigation</li>
+                    <li>Integration with Forge APIs for real Jira data</li>
+                </ul>
+            </div>
+        </div>
+    `;
+    
+    // Add back button functionality
+    document.getElementById('back-btn').addEventListener('click', function() {
+        loadApp(); // Reload the original app
+    });
 }
 
 function openFullComponentExplorer() {
