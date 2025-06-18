@@ -5,6 +5,8 @@ import Select from '@atlaskit/select';
 import Checkbox from '@atlaskit/checkbox';
 import Toggle from '@atlaskit/toggle';
 import Button from '@atlaskit/button/standard-button';
+import { Box, Inline, Stack, Text, Heading } from '@atlaskit/primitives';
+import { componentStyles } from '../../styles/theme';
 
 export const FormExamples = () => {
     const [toggleState, setToggleState] = useState(false);
@@ -24,9 +26,12 @@ export const FormExamples = () => {
     };
 
     return (
-        <div style={{ padding: '20px' }}>
-            <h3>📝 Form Components</h3>
-            <p>Forms collect user input with validation and clear feedback.</p>
+        <Box paddingInline="space.200">
+            <Stack space="space.400">
+                <Stack space="space.100">
+                    <Heading size="medium">📝 Form Components</Heading>
+                    <Text>Forms collect user input with validation and clear feedback.</Text>
+                </Stack>
             
             <div style={{ marginBottom: '30px' }}>
                 <h4>Complete Form Example</h4>
@@ -143,6 +148,7 @@ export const FormExamples = () => {
                     <li><strong>Accessibility:</strong> All form components include proper ARIA labels</li>
                 </ul>
             </div>
-        </div>
+            </Stack>
+        </Box>
     );
 };

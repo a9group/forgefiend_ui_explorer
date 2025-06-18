@@ -24,6 +24,9 @@
     "@atlaskit/section-message": "^6.0.0",
     "@atlaskit/progress-indicator": "^9.0.0",
     "@atlaskit/code": "^15.0.0",
+    "@atlaskit/tokens": "^1.0.0",
+    "@atlaskit/primitives": "^5.0.0",
+    "@atlaskit/page-layout": "^3.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },

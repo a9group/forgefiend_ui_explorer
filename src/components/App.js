@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal, ModalBody, ModalHeader, ModalFooter } from '@atlaskit/modal-dialog';
 import Button from '@atlaskit/button/standard-button';
 import Tabs, { Tab, TabList, TabPanel } from '@atlaskit/tabs';
+import { Box, Inline, Stack, Text, Heading } from '@atlaskit/primitives';
 import { fetchUserDetails } from '../services/userService';
 import { ButtonExamples } from './examples/ButtonExamples';
 import { TableExamples } from './examples/TableExamples';
@@ -9,6 +10,7 @@ import { FormExamples } from './examples/FormExamples';
 import { FeedbackExamples } from './examples/FeedbackExamples';
 import { NavigationExamples } from './examples/NavigationExamples';
 import { DataDisplayExamples } from './examples/DataDisplayExamples';
+import { componentStyles, spacing } from '../styles/theme';
 
 export const App = () => {
     const [isOpen, setOpen] = useState(false);
@@ -27,30 +29,35 @@ export const App = () => {
     }, []);
 
     return (
-        <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
-            <div style={{ marginBottom: '30px', textAlign: 'center' }}>
-                <h1>🔥 Forge Fiend UI Explorer</h1>
-                <p style={{ fontSize: '18px', color: '#6B778C', marginBottom: '20px' }}>
-                    Explore all available UI Kit 2 components for Forge apps
-                </p>
-                <p style={{ marginBottom: '20px' }}>
-                    Current User: <strong>{user ? user.displayName : 'Loading...'}</strong>
-                </p>
-                <Button appearance="primary" onClick={() => setOpen(true)}>
-                    🚀 Open Component Explorer
-                </Button>
-            </div>
+        <Box style={componentStyles.container}>
+            <Stack space="space.400">
+                <Box style={componentStyles.centerContent}>
+                    <Stack space="space.200" alignInline="center">
+                        <Heading size="xxlarge">🔥 Forge Fiend UI Explorer</Heading>
+                        <Text size="large" color="color.text.subtle">
+                            Explore all available UI Kit 2 components for Forge apps
+                        </Text>
+                        <Text>
+                            Current User: <Text weight="semibold">{user ? user.displayName : 'Loading...'}</Text>
+                        </Text>
+                        <Button appearance="primary" onClick={() => setOpen(true)}>
+                            🚀 Open Component Explorer
+                        </Button>
+                    </Stack>
+                </Box>
 
-            {/* Quick Preview Section */}
-            <div style={{ marginBottom: '30px' }}>
-                <h2>Quick Component Preview</h2>
-                <ButtonExamples preview={true} />
-            </div>
+                <Box style={componentStyles.section}>
+                    <Stack space="space.200">
+                        <Heading size="large">Quick Component Preview</Heading>
+                        <ButtonExamples preview={true} />
+                    </Stack>
+                </Box>
+            </Stack>
 
             {isOpen && (
                 <Modal onClose={() => setOpen(false)} width="large">
                     <ModalHeader>
-                        <h2>🎨 Forge UI Kit 2 Component Library</h2>
+                        <Heading size="medium">🎨 Forge UI Kit 2 Component Library</Heading>
                     </ModalHeader>
                     <ModalBody>
                         <Tabs>
@@ -89,6 +96,6 @@ export const App = () => {
                     </ModalFooter>
                 </Modal>
             )}
-        </div>
+        </Box>
     );
 };
